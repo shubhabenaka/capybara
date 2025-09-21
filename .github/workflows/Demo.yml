@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       since:
-        description: 'Get logs since this ref (e.g., HEAD~5)'
-        required: true
-        default: '1'
+        description: "Number of recent commits to include"
+        required: false
+        default: '5' 
       email:
         description: 'Recipient email address'
         required: true
