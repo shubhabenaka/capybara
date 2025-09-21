@@ -1,32 +1,41 @@
-# .github/workflows/email-notification.yml
-
-name: Email Notification
+name: Send Git Logs via Email
 
 on:
-  push:
-    branches:
-      - main  # or your target branch
+  workflow_dispatch:
+    inputs:
+      since:
+        description: 'Get logs since this ref (e.g., HEAD~5)'
+        required: true
+        default: 'HEAD~5'
+      email:
+        description: 'Recipient email address'
+        required: true
+        default: 'shubharavi687@gmail.com'
 
 jobs:
-  notify:
+  send-email:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
 
-      - name: Get commit logs
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Get Git Logs
         run: |
-          git log -1 > commit_log.txt
+          git log ${{ github.event.inputs.since }}..HEAD > git_logs.txt
+          echo "Generated git_logs.txt:"
+          cat git_logs.txt
 
       - name: Send Email
         uses: dawidd6/action-send-mail@v3
         with:
-          server_address: smtp.yourserver.com
+          server_address: smtp.gmail.com
           server_port: 587
-          username: shubharavikumar
-          password: ${{ secrets.SMTP_PASSWORD}}
-          subject: Git Commit Notification
-          to: shubharavi687@gmail.com
-          from: Git Bot <shubharavikumar@gmail.com>
+          username: shubharavi687@gmail.com
+          password: ${{ secrets.SMTP_PASSWORD }}
+          subject: Git Logs Notification
+          to: ${{ github.event.inputs.email }}
+          from: GitHub Bot <shubharavikumar@gmail.com>
           body: |
-            A new commit has been pushed. See attached logs.
-          attachments: commit_log.txt
+            Git logs from ${{ github.event.inputs.since }} to HEAD are attached.
+          attachments: git_logs.txt
