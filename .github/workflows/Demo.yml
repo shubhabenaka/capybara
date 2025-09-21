@@ -21,13 +21,15 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Get Git Logs Safely
-        run: count="${{ github.event.inputs.count || '5' }}"
+        run: |
+            count="5"
+
             if ! [[ "$count" =~ ^[0-9]+$ ]]; then
-            echo "Invalid input. Using default 5."
+              echo "Invalid input. Using default 5."
             count=5
             fi
-            git log -n "$count" > git_logs.txt
 
+            git log -n "$count" > git_logs.txt
 
       - name: Send Email
         uses: dawidd6/action-send-mail@v3
