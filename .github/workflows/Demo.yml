@@ -22,11 +22,11 @@ jobs:
         with:
           server_address: smtp.yourserver.com
           server_port: 587
-          username: shubharavi687
+          username: shubharavikumar
           password: ${{ secrets.SMTP_PASSWORD}}
           subject: Git Commit Notification
           to: shubharavi687@gmail.com
-          from: Git Bot <shubharavi687@gmail.com>
+          from: Git Bot <shubharavikumar@gmail.com>
           body: |
             A new commit has been pushed. See attached logs.
           attachments: commit_log.txt
