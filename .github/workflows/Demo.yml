@@ -6,7 +6,7 @@ on:
       since:
         description: 'Get logs since this ref (e.g., HEAD~5)'
         required: true
-        default: 5
+        default: '5'
       email:
         description: 'Recipient email address'
         required: true
