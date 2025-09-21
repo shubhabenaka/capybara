@@ -6,7 +6,7 @@ on:
       since:
         description: 'Get logs since this ref (e.g., HEAD~5)'
         required: true
-        default: git log ${{ github.event.inputs.since }}..HEAD > git_logs.txt
+        default: 5
       email:
         description: 'Recipient email address'
         required: true
