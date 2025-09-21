@@ -20,11 +20,14 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v3
 
-      - name: Get Git Logs
-        run: |
-          git log ${{ github.event.inputs.since }}..HEAD > git_logs.txt
-          echo "Generated git_logs.txt:"
-          cat git_logs.txt
+      - name: Get Git Logs Safely
+        run: count="${{ github.event.inputs.count || '5' }}"
+            if ! [[ "$count" =~ ^[0-9]+$ ]]; then
+            echo "Invalid input. Using default 5."
+            count=5
+            fi
+            git log -n "$count" > git_logs.txt
+
 
       - name: Send Email
         uses: dawidd6/action-send-mail@v3
