@@ -24,7 +24,8 @@ jobs:
         run: |
           count="${{ github.event.inputs.count || '5' }}"
 
-          if ! [[ "$count" =~ ^[0-9]+$ ]]; then
+          if ! [[ "$count" =~ ^[0-9]+$ ]]; 
+          then
           echo "Invalid input '$count'. Using default 5."
           count=5
           fi
