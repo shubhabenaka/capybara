@@ -23,7 +23,7 @@ jobs:
           server_address: smtp.yourserver.com
           server_port: 587
           username: your_username
-          password: ${{ secrets.EMAIL_PASSWORD }}
+          password: ${{ secrets.SMTP_PASSWORD}}
           subject: Git Commit Notification
           to: shubharavi687@gmail.com
           from: Git Bot <your-email@example.com>
