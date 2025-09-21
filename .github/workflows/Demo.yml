@@ -1,4 +1,4 @@
-# .github/workflows/Demo.yml
+# .github/workflows/email-notification.yml
 
 name: Email Notification
 
